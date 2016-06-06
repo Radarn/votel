@@ -1,3 +1,5 @@
+'use strict';
+
 var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(function ($routeProvider) {
@@ -10,13 +12,13 @@ myApp.config(function ($routeProvider) {
 		controllerAs: "vm"
 	})
 
-	.when("/poll-list", {
+	.when("/poll-list/:type", {
 		templateUrl: "../templates/poll-list.html",
 		controller: "listCtrl",
 		controllerAs: "vm"
 	})
 
-	.when("/poll-detail", {
+	.when("/poll-detail/:id", {
 		templateUrl: "../templates/poll-detail.html",
 		controller: "detailCtrl",
 		controllerAs: "vm"
@@ -34,11 +36,13 @@ myApp.controller('dashboardCtrl', ['$scope', function($scope) {
 	var vm = this
 }])
 
-myApp.controller('listCtrl', ['$scope', function($scope) {
+myApp.controller('listCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
 	var vm = this
+	vm.type = $routeParams.type
+	console.log(vm.type)
 }])
 
-myApp.controller('detailCtrl', ['$scope', function($scope) {
+myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
 	var vm = this
 }])
 

@@ -10,6 +10,6 @@ var voteSchema = new Schema({
 	}
 })
 
-var Vote = mongoose.model('Vote', messageSchema);
+var Vote = mongoose.model('Vote', voteSchema);
 
 module.exports = Vote
