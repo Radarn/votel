@@ -32,20 +32,6 @@ myApp.config(function ($routeProvider) {
 });
 
 
-myApp.controller('dashboardCtrl', ['$scope', function($scope) {
-	var vm = this
-}])
 
-myApp.controller('listCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
-	var vm = this
-	vm.type = $routeParams.type
-	console.log(vm.type)
-}])
 
-myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
-	var vm = this
-}])
 
-myApp.controller('createCtrl', ['$scope', function($scope) {
-	var vm = this
-}])

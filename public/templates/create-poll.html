@@ -1,0 +1,57 @@
+<form class="create-poll-form">
+    <div class="row">
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <label for="title">Title</label>
+            <input ng-model="vm.poll.title" type="text" class="form-control" id="title" placeholder="Give your poll a title">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <label>List of options</label>
+            <input ng-model="vm.poll.firstRequiredOption" type="text" class="form-control" id="item" placeholder="Option name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <input ng-model="vm.poll.secondRequiredOption" type="text" class="form-control" id="item" placeholder="Option name">
+        </div>
+    </div>
+    <div ng-repeat="options in vm.numberOfOptions">
+        <div class="row">
+            <div class="form-group col-sm-4 col-sm-offset-4">
+                <input ng-model="vm.poll.options[options]" type="text" class="form-control" id="item" placeholder="Option name">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <label>Add another item to your options list</label>
+            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="vm.anotherOption()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <select name="kind" id="kind" ng-model="vm.poll.kind">
+                  <option ng-repeat="kind in vm.kinds" value="{{kind}}">{{kind}}</option>
+                </select>
+            <!--<div class="btn-group">
+                <button ng-model="vm.poll.kind" id="create-poll-category" class="btn btn-default btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Category <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>Food</li>
+                    <li>Movies</li>
+                    <li>Music</li>
+                    <li>Games</li>
+                </ul>
+            </div>-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.addPoll(vm.poll)">Create poll</button>
+        </div>
+    </div>
+</form>

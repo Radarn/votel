@@ -2,11 +2,13 @@ var express = require('express');
 var Poll = require('../modules/Poll');
 var Vote = require('../modules/Vote')
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 module.exports = function(app) {
 
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(cors());
 
 	var router = express.Router();
 
@@ -18,13 +20,20 @@ module.exports = function(app) {
 	router.route('/polls')
 
 	.post(function(req, res) {
-		var name = req.body.name
-		var alternatives = req.body.alternatives
+		console.log(req.body)
+
+
+		var title = req.body.title
+		var firstRequiredOption = req.body.firstRequiredOption
+		var secondRequiredOption = req.body.secondRequiredOption
+		var options = req.body.options
 		var kind = req.body.kind
 
 		var newPoll = Poll({
-			name: name,
-			alternatives: alternatives,
+			title: title,
+			firstRequiredOption: firstRequiredOption,
+			secondRequiredOption: secondRequiredOption,
+			options: options,
 			kind: kind
 		})
 		
@@ -48,12 +57,12 @@ module.exports = function(app) {
 
 	.post(function(req, res) {
 		var name = req.body.name
-		var alternatives = req.body.alternatives
+		var options = req.body.options
 		var kind = req.body.kind
 
 		var newPoll = Poll({
 			name: name,
-			alternatives: alternatives,
+			options: options,
 			kind: kind
 		})
 		

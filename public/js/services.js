@@ -9,7 +9,7 @@
     /* @ngInject */
     function Service() {
         var service = {
-            'API_BASE_URL':'http://berwin.willandskill.eu:8081',
+            'API_BASE_URL':'http://localhost:8080',
         };
 
         return service;

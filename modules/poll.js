@@ -4,7 +4,9 @@ var Schema = mongoose.Schema;
 
 var pollSchema = new Schema({
 	name: String,
-	alternatives: Object,
+	firstRequiredOption: String,
+	secondRequiredOption: String,
+	options: Object,
 	kind: String,
 	date: {
 	  type: Date,

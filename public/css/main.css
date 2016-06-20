@@ -1,0 +1,19 @@
+#create-poll {
+	position: absolute;
+	right: 0;
+	top: 16%;
+	margin: 10px;
+}
+
+#create-poll-category {
+	width: 280px;
+}
+
+.navbar-brand {
+	position: absolute;
+	top: 22%;
+}
+
+.page-header {
+	text-align: center;
+}
