@@ -45,6 +45,7 @@ module.exports = function(app) {
 	})
 
 	.get(function(req, res) {
+		console.log(req)
        	Poll.find(function(err, polls) {
            	if (err)
             	res.send(err);

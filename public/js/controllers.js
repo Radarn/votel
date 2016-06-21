@@ -11,14 +11,30 @@ myApp.controller('dashboardCtrl', ['$scope', function($scope) {
 
 }]);
 
-myApp.controller('listCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
+myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function($scope, $routeParams, HttpFactory) {
 	var vm = this
+
+	vm.getPolls = getPolls;
 
 	activate()
 
 	function activate() {
 		vm.type = $routeParams.type
+		vm.getPolls();
 		console.log(vm.type)
+	}
+
+	function getPolls() {
+		var pollKind = {
+			kind: vm.type,
+			url: "/api/polls"
+		}
+		HttpFactory.get(pollKind).then(function(res) {
+			console.log(res)
+			vm.polls = res.data
+		})
+
+
 	}
 	
 }])
@@ -62,7 +78,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', function($scope, HttpFa
 	}
 
 	function addPoll(newPoll) {
-		
+
 		var poll = {
 			data: newPoll,
 			url: "/api/polls"

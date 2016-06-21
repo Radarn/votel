@@ -1,22 +1,47 @@
 <div ng-if="vm.type === 'food'">
-	<h1>Food</h1>
-	<div ng-repeat=""></div>
+	<div class="list-group">
+		<h1>Food</h1>
+		<div ng-repeat="poll in vm.polls">
+			<div ng-if="poll.kind === 'food'">
+				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 <div ng-if="vm.type === 'music'">
-	<h1>Music</h1>
-	<div ng-repeat=""></div>
+	<div class="list-group">
+		<h1>Music</h1>
+		<div ng-repeat="poll in vm.polls">
+			<div ng-if="poll.kind === 'music'">
+				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 <div ng-if="vm.type === 'movie'">
-	<h1>Movies</h1>
-	<div ng-repeat=""></div>
+	<div class="list-group">
+		<h1>Movies</h1>
+		<div ng-repeat="poll in vm.polls">
+			<div ng-if="poll.kind === 'movie'">
+				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
+			</div>
+		</div>
+	</div>
+
 </div>
 
 
 <div ng-if="vm.type === 'game'">
-	<h1>Games</h1>
-	<div ng-repeat=""></div>
+	<div class="list-group">
+		<h1>Games</h1>
+		<div ng-repeat="poll in vm.polls">
+			<div ng-if="poll.kind === 'games'">
+				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
+			</div>
+		</div>
+	</div>
 </div>
