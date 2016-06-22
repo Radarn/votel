@@ -5,13 +5,16 @@ var Schema = mongoose.Schema;
 var voteSchema = new mongoose.Schema({ ip: 'String' });
 
 var choiceSchema = new mongoose.Schema({ 
-  text: String,
-  votes: [voteSchema]
+  name: String,
+  votes: {
+  	type: Number,
+  	default: 0
+  }
 });
 
 var pollSchema = new Schema({
 	title: String,
-	options: Object,
+	options: [choiceSchema],
 	kind: String,
 	show: {
 		type: Boolean,

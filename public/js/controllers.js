@@ -32,7 +32,7 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	function getPolls() {
 		var pollKind = {
 			kind: vm.type,
-			url: "/api/polls"
+			url: "/api/getAllPolls/" + vm.type 
 		}
 		HttpFactory.get(pollKind).then(function(res) {
 			console.log(res)
@@ -41,10 +41,10 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	}
 
 	function getSpecificPoll(id) {
-		console.log(id)
+		console.log("POLL ID " + id)
 		var specificPoll = {
 			params: id,
-			url: "/api/polls/getDetailed"
+			url: "/api/polls/" + id
 		}
 		HttpFactory.get(specificPoll).then(function(res) {
 			console.log(res)
@@ -52,7 +52,7 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		})
 	}
 
-	function isChecked() {
+	function isChecked(voteOption) {
 		$('input[type=checkbox]').click(function() {
 		        var groupName = $(this).attr('groupname');
 
@@ -69,6 +69,8 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		                $(this).prop('checked', 'checked');
 
 		        });
+		console.log("VoteOption ID " + voteOption._id)
+		vm.currentOptionId = voteOption._id
 	}
 
 	function showVotes(poll) {
@@ -77,12 +79,14 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		} else {
 			poll.show = false;
 		}
+
 		getSpecificPoll(poll._id)
 	}
 
 	function submitVote() {
 	
 		console.log("submit!")
+		//updateSpecificVote()
 	}
 }])
 

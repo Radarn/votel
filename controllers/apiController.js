@@ -17,7 +17,7 @@ module.exports = function(app) {
 	    next();
 	});
 
-	router.route('/polls')
+	router.route('/polls/')
 
 	.post(function(req, res) {
 		console.log(req.body)
@@ -30,7 +30,7 @@ module.exports = function(app) {
 
 		var newPoll = Poll({
 			title: title,
-			options: options,
+			options: {name: req.body.options},
 			kind: kind
 		})
 		
@@ -42,6 +42,7 @@ module.exports = function(app) {
 	})
 
 	.get(function(req, res) {
+		console.log(req.params.id)
        	Poll.find(function(err, polls) {
            	if (err)
             	res.send(err);
@@ -50,23 +51,72 @@ module.exports = function(app) {
        	});
    	});
 
-   	router.route('/polls/getDetailed')
-   		.get(function(req, res) {
-   			console.log(res.req.query)
-   			var query = res.req.query
-   			var queryString = ""
+   		router.route('/polls/:id')
 
-   			for (var i = 0; i < query.length; i++) {
-   				queryString += query[i]
-   				console.log(query[i])
-   				console.log("HEJ")
-   			}
+   		.post(function(req, res) {
+   			console.log(req.body)
+
+
+   			var title = req.body.title
    			
-   	       	Poll.find(function(err, polls) {
+   			var options = req.body.options
+   			var kind = req.body.kind
+
+   			var newPoll = Poll({
+   				title: title,
+   				options: {name: req.body.options},
+   				kind: kind
+   			})
+   			
+   			Poll.create(newPoll, function(err, results) {
+   				console.log(results)
+   				res.send('Success ' + results)
+   			})
+
+   		})
+
+   		.get(function(req, res) {
+   			var id = req.params.id;
+   			console.log(id)
+   	       	Poll.find({_id: id}, function(err, poll) {
    	           	if (err)
    	            	res.send(err);
 
-   	           	res.json(polls);
+   	           	res.json(poll);
+   	       	});
+   	   	});
+
+   		router.route('/getAllPolls/:kind')
+
+   		.post(function(req, res) {
+   			console.log(req.body)
+
+
+   			var title = req.body.title
+   			
+   			var options = req.body.options
+   			var kind = req.body.kind
+
+   			var newPoll = Poll({
+   				title: title,
+   				options: {name: req.body.options},
+   				kind: kind
+   			})
+   			
+   			Poll.create(newPoll, function(err, results) {
+   				console.log(results)
+   				res.send('Success ' + results)
+   			})
+
+   		})
+
+   		.get(function(req, res) {
+   			var kind = req.params.kind;
+   	       	Poll.find({kind: kind}, function(err, poll) {
+   	           	if (err)
+   	            	res.send(err);
+
+   	           	res.json(poll);
    	       	});
    	   	});
 
