@@ -82,18 +82,7 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 
 	function submitVote() {
 	
-		$('input[type=checkbox]').each(function(index, element) {
-			if (element.checked === true) {
-				var vote = {
-					id: element.value,
-					value: true
-				}
-				HttpFactory.post(vote).then(function(res) {
-					console.log(res)
-				})
-				
-			}
-		})
+		console.log("submit!")
 	}
 }])
 
@@ -108,7 +97,7 @@ myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $rout
 	}
 }])
 
-myApp.controller('createCtrl', ['$scope', 'HttpFactory', function($scope, HttpFactory) {
+myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function($scope, HttpFactory, $location) {
 	var vm = this
 	
 	vm.anotherOption = anotherOption;
@@ -125,6 +114,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', function($scope, HttpFa
 			"games"
 		]
 		vm.optionsId = 3
+		
 	}
 
 	function anotherOption() {
@@ -134,7 +124,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', function($scope, HttpFa
 	}
 
 	function addPoll(newPoll) {
-
+		
 		var poll = {
 			data: newPoll,
 			url: "/api/polls"
@@ -142,6 +132,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', function($scope, HttpFa
 		console.log(poll)
 		HttpFactory.post(poll).then(function(res) {
 			console.log(res)
+			$location.url(['/poll-list/' + newPoll.kind])
 		})
 	}
 

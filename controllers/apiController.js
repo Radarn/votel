@@ -51,8 +51,8 @@ module.exports = function(app) {
    	});
 
    	router.route('/polls/getDetailed')
-   		.get(function(req, res) {
-   			console.log(res.req)
+   		.put(function(req, res) {
+   			console.log(res.req.query)
    			var query = res.req.query
    			var queryString = ""
 
