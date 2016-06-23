@@ -3,11 +3,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var voteSchema = new Schema({
-	value: Boolean,
-	date: {
-	  type: Date,
-	  default: Date.now
-	}
+	text: String,
+	value: Boolean
 })
 
 var Vote = mongoose.model('Vote', voteSchema);

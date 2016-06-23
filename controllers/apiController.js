@@ -24,15 +24,12 @@ module.exports = function(app) {
 
 
 		var title = req.body.title
-		var firstRequiredOption = req.body.firstRequiredOption
-		var secondRequiredOption = req.body.secondRequiredOption
+		
 		var options = req.body.options
 		var kind = req.body.kind
 
 		var newPoll = Poll({
 			title: title,
-			firstRequiredOption: firstRequiredOption,
-			secondRequiredOption: secondRequiredOption,
 			options: options,
 			kind: kind
 		})
@@ -45,7 +42,6 @@ module.exports = function(app) {
 	})
 
 	.get(function(req, res) {
-		console.log(req)
        	Poll.find(function(err, polls) {
            	if (err)
             	res.send(err);
@@ -54,6 +50,26 @@ module.exports = function(app) {
        	});
    	});
 
+   	router.route('/polls/getDetailed')
+   		.get(function(req, res) {
+   			console.log(res.req)
+   			var query = res.req.query
+   			var queryString = ""
+
+   			for (var i = 0; i < query.length; i++) {
+   				queryString += query[i]
+   				console.log(query[i])
+   				console.log("HEJ")
+   			}
+   			
+   	       	Poll.find(function(err, polls) {
+   	           	if (err)
+   	            	res.send(err);
+
+   	           	res.json(polls);
+   	       	});
+   	   	});
+
 	router.route('/votes')
 
 	.post(function(req, res) {
@@ -61,7 +77,7 @@ module.exports = function(app) {
 		var options = req.body.options
 		var kind = req.body.kind
 
-		var newPoll = Poll({
+		var Vote = Poll({
 			name: name,
 			options: options,
 			kind: kind

@@ -1,46 +1,140 @@
+<!-- This is very ugly and repetitive I know, will sort out the sorting in backend later -->
+
 <div ng-if="vm.type === 'food'">
 	<div class="list-group">
 		<h1>Food</h1>
 		<div ng-repeat="poll in vm.polls">
 			<div ng-if="poll.kind === 'food'">
-				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
+				<button type="button" class="list-group-item" ng-click="vm.showVotes(poll)">{{poll.title}}</button>
+				<div ng-if="poll.show === true">
+					<div class="col-md-4"></div>
+				    <div class="col-md-4">
+				        <div class="panel panel-primary">
+				            <div class="panel-heading">
+				                <h3 class="panel-title"><span class="fa fa-line-chart"></span> Vote! </h3>
+				            </div>
+				            <div class="panel-body">
+				                <ul class="list-group">
+            	                    <div ng-repeat="options in poll.options">
+				                    <li class="list-group-item">
+				                        <div class="checkbox">
+				                            <label>
+				                                <input type="checkbox" value="{{options}}" groupname="group1" ng-click="vm.isChecked()"> {{options}}
+				                                </div>
+				                            </label>
+				                        </div>
+				                    </li>
+				                </ul>
+				            </div>
+				            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.submitVote()">Ok!</button>
+				        </div>
+				    </div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 
 <div ng-if="vm.type === 'music'">
 	<div class="list-group">
 		<h1>Music</h1>
 		<div ng-repeat="poll in vm.polls">
 			<div ng-if="poll.kind === 'music'">
-				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
+				<button type="button" class="list-group-item" ng-click="vm.showVotes(poll)">{{poll.title}}</button>
+				<div ng-if="poll.show === true">
+					<div class="col-md-4"></div>
+				    <div class="col-md-4">
+				        <div class="panel panel-primary">
+				            <div class="panel-heading">
+				                <h3 class="panel-title"><span class="fa fa-line-chart"></span> Vote! </h3>
+				            </div>
+				            <div class="panel-body">
+				                <ul class="list-group">
+            	                    <div ng-repeat="options in poll.options">
+				                    <li class="list-group-item">
+				                        <div class="checkbox">
+				                            <label>
+				                                <input type="checkbox" value="{{options}}" groupname="group1" ng-click="vm.isChecked()"> {{options}}
+				                                </div>
+				                            </label>
+				                        </div>
+				                    </li>
+				                </ul>
+				            </div>
+				            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.submitVote()">Ok!</button>
+				        </div>
+				    </div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<div ng-if="vm.type === 'game'">
+	<div class="list-group">
+		<h1>Games</h1>
+		<div ng-repeat="poll in vm.polls">
+			<div ng-if="poll.kind === 'game'">
+				<button type="button" class="list-group-item" ng-click="vm.showVotes(poll)">{{poll.title}}</button>
+				<div ng-if="poll.show === true">
+					<div class="col-md-4"></div>
+				    <div class="col-md-4">
+				        <div class="panel panel-primary">
+				            <div class="panel-heading">
+				                <h3 class="panel-title"><span class="fa fa-line-chart"></span> Vote! </h3>
+				            </div>
+				            <div class="panel-body">
+				                <ul class="list-group">
+            	                    <div ng-repeat="options in poll.options">
+				                    <li class="list-group-item">
+				                        <div class="checkbox">
+				                            <label>
+				                                <input type="checkbox" value="{{options}}" groupname="group1" ng-click="vm.isChecked()"> {{options}}
+				                                </div>
+				                            </label>
+				                        </div>
+				                    </li>
+				                </ul>
+				            </div>
+				            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.submitVote()">Ok!</button>
+				        </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div ng-if="vm.type === 'movie'">
 	<div class="list-group">
 		<h1>Movies</h1>
 		<div ng-repeat="poll in vm.polls">
 			<div ng-if="poll.kind === 'movie'">
-				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
-			</div>
-		</div>
-	</div>
-
-</div>
-
-
-<div ng-if="vm.type === 'game'">
-	<div class="list-group">
-		<h1>Games</h1>
-		<div ng-repeat="poll in vm.polls">
-			<div ng-if="poll.kind === 'games'">
-				<div ng-repeat="options in poll.options"><button type="button" class="list-group-item">{{options}}</button></div>
+				<button type="button" class="list-group-item" ng-click="vm.showVotes(poll)">{{poll.title}}</button>
+				<div ng-if="poll.show === true">
+					<div class="col-md-4"></div>
+				    <div class="col-md-4">
+				        <div class="panel panel-primary">
+				            <div class="panel-heading">
+				                <h3 class="panel-title"><span class="fa fa-line-chart"></span> Vote! </h3>
+				            </div>
+				            <div class="panel-body">
+				                <ul class="list-group">
+            	                    <div ng-repeat="options in poll.options">
+				                    <li class="list-group-item">
+				                        <div class="checkbox">
+				                            <label>
+				                                <input type="checkbox" value="{{options}}" groupname="group1" ng-click="vm.isChecked()"> {{options}}
+				                                </div>
+				                            </label>
+				                        </div>
+				                    </li>
+				                </ul>
+				            </div>
+				            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.submitVote()">Ok!</button>
+				        </div>
+				    </div>
+				</div>
 			</div>
 		</div>
 	</div>

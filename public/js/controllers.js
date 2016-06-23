@@ -15,11 +15,16 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	var vm = this
 
 	vm.getPolls = getPolls;
+	vm.showVotes = showVotes;
+	vm.isChecked = isChecked;
+	vm.submitVote = submitVote;
+	vm.submitVote = getSpecificPoll;
 
 	activate()
 
 	function activate() {
-		vm.type = $routeParams.type
+		vm.type = $routeParams.type;
+		vm.votes = false;
 		vm.getPolls();
 		console.log(vm.type)
 	}
@@ -33,10 +38,63 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 			console.log(res)
 			vm.polls = res.data
 		})
-
-
 	}
+
+	function getSpecificPoll(id) {
+		console.log(id)
+		var specificPoll = {
+			params: id,
+			url: "/api/polls/getDetailed"
+		}
+		HttpFactory.get(specificPoll).then(function(res) {
+			console.log(res)
+			
+		})
+	}
+
+	function isChecked() {
+		$('input[type=checkbox]').click(function() {
+		        var groupName = $(this).attr('groupname');
+
+		            if (!groupName)
+		                return;
+
+		            var checked = $(this).is(':checked');
+
+		            $("input[groupname='" + groupName + "']:checked").each(function() {
+		                $(this).prop('checked', '');
+		            });
+
+		            if (checked)
+		                $(this).prop('checked', 'checked');
+
+		        });
+	}
+
+	function showVotes(poll) {
+		if (poll.show === false) {
+			poll.show = true;
+		} else {
+			poll.show = false;
+		}
+		getSpecificPoll(poll._id)
+	}
+
+	function submitVote() {
 	
+		$('input[type=checkbox]').each(function(index, element) {
+			if (element.checked === true) {
+				var vote = {
+					id: element.value,
+					value: true
+				}
+				HttpFactory.post(vote).then(function(res) {
+					console.log(res)
+				})
+				
+			}
+		})
+	}
 }])
 
 myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
@@ -59,7 +117,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', function($scope, HttpFa
 	activate()
 
 	function activate() {
-		vm.numberOfOptions = []
+		vm.numberOfOptions = [1, 2]
 		vm.kinds = [
 			"food",
 			"music",
@@ -72,8 +130,6 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', function($scope, HttpFa
 	function anotherOption() {
 		vm.numberOfOptions.push(vm.optionsId);
 		vm.optionsId += 1;
-		
-
 		
 	}
 
