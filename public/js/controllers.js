@@ -103,11 +103,11 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		var incrementedVote = vm.numberOfVotes + 1
 		console.log(incrementedVote)
 		var updatedVote = {
-			data: incrementedVote,
-			url: "/api/polls/" + vm.currentOptionId
+			params: incrementedVote,
+			url: "/api/votes/update/" + vm.currentOptionId
 		}
-		HttpFactory.put(updatedVote).then(function(res) {
-			console.log(response)
+		HttpFactory.get(updatedVote).then(function(res) {
+			console.log(res)
 		})
 	}
 }])

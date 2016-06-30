@@ -48,28 +48,6 @@ module.exports = function(app) {
 
    	router.route('/polls/:id')
 
-   	.post(function(req, res) {
-		console.log(req.body)
-
-
-		var title = req.body.title
-		
-		var options = req.body.options
-		var kind = req.body.kind
-
-		var newPoll = Poll({
-			title: title,
-			options: {name: req.body.options},
-			kind: kind
-		})
-		
-		Poll.create(newPoll, function(err, results) {
-			console.log(results)
-			res.send('Success ' + results)
-		})
-
-	})
-
 	.get(function(req, res) {
 		var id = req.params.id;
 		console.log(id)
@@ -78,19 +56,7 @@ module.exports = function(app) {
             	res.send(err);
 
            	res.json(poll);
-       	})
-   	})
-
-   	.put(function(req, res) {
-   		console.log("PUT")
-   		var id = req.params.id
-   		console.log(id)
-   			Poll.update({"options._id" : id }, function(err, votes) {
-   		    	if (err)
-   		     	res.send(err);
-   		     console.log("This is votes" + votes)
-   		    	res.json(votes);
-   			});
+       	});
    	});
 
 	router.route('/getAllPolls/:kind')
@@ -108,17 +74,6 @@ module.exports = function(app) {
 
 	router.route('/votes/:id')
 
-	.put(function(req, res) {
-		var id = req.params.id
-		console.log(id)
-			Poll.update({"options._id" : id }, function(err, votes) {
-		    	if (err)
-		     	res.send(err);
-		     console.log("This is votes" + votes)
-		    	res.json(votes);
-			});
-	})
-
 	.get(function(req, res) {
 		var id = req.params.id
 		console.log("This is vote ID " + id)
@@ -129,6 +84,25 @@ module.exports = function(app) {
            	res.json(votes);
        	});
    	});
+
+   	router.route('/votes/update/:id')
+
+   		.get(function(req, res) {
+   			var id = req.params.id
+   			console.log("This is vote ID " + id)
+   	       	Poll.find({"options._id" : id }, function(err, votes) {
+   	           	if (err)
+   	            	res.send(err);
+   	            var voteScore = votes[0].options[0].votes
+   	            var incrementedScore = (voteScore + 1)
+   	            console.log(incrementedScore)
+   	            Poll.update({"options._id" : id }, {voteScore: incrementedScore}, function(err, score) {
+   	            	console.log(score)
+   	            	res.json(score);
+   	            })
+   	           	
+   	       	});
+   	   	});
 
 	app.use('/api', router);
 }
