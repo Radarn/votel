@@ -136,7 +136,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 		vm.kinds = [
 			"food",
 			"music",
-			"movie",
+			"movies",
 			"games"
 		]
 		vm.optionsId = 3
@@ -150,7 +150,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 	function addPoll(newPoll) {	
 		var poll = {
 			data: newPoll,
-			url: "/api/polls"
+			url: "/api/polls/"
 		}
 		console.log(poll)
 		HttpFactory.post(poll).then(function(res) {

@@ -20,19 +20,24 @@ module.exports = function(app) {
 	router.route('/polls/')
 
 	.post(function(req, res) {
-		console.log(req.body)
+		console.log(req.body.kind)
 
 
 		var title = req.body.title
 		
 		var options = req.body.options
+		var arr = []
+		arr.push(options)
+		console.log(arr)
 		var kind = req.body.kind
 
 		var newPoll = Poll({
 			title: title,
-			options: {name: req.body.options},
+			options: {"names": arr},
 			kind: kind
 		})
+
+		
 		
 		Poll.create(newPoll, function(err, results) {
 			console.log(results)
@@ -92,6 +97,7 @@ module.exports = function(app) {
 
 	.get(function(req, res) {
 		var kind = req.params.kind;
+		console.log(kind)
        	Poll.find({kind: kind}, function(err, poll) {
            	if (err)
             	res.send(err);

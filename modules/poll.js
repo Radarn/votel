@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var voteSchema = new mongoose.Schema({ ip: 'String' });
 
 var choiceSchema = new mongoose.Schema({ 
-  name: String,
+  names: Array,
   votes: {
   	type: Number,
   	default: 0

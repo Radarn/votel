@@ -12,14 +12,18 @@
 		            <div class="panel-body">
 		                <ul class="list-group">
     	                    <div ng-repeat="options in poll.options">
-		                    <li class="list-group-item">
-		                        <div class="checkbox">
-		                            <label>
-		                                <input type="checkbox" value="{{options}}" groupname="group1" ng-click="vm.isChecked(options)"> {{options}}
-		                                </div>
-		                            </label>
-		                        </div>
-		                    </li>
+                            	<div ng-repeat="names in options.names">
+                            		<div ng-repeat="name in names">
+                            			<label>
+	                            			<li class="list-group-item">
+	                            			    <div class="checkbox">
+	                                				<input type="checkbox" value="{{name}}" groupname="group1" ng-click="vm.isChecked(options)"> {{name}}
+	                                			</div>
+	                                		</li>
+                                		</label>
+	                                </div>
+	                            </div>
+		                    </div>
 		                </ul>
 		            </div>
 		            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.submitVote()">Ok!</button>
