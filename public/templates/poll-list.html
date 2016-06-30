@@ -1,5 +1,5 @@
 <div class="list-group">
-	<h1>Food</h1>
+	<h1>{{vm.type}}</h1>
 	<div ng-repeat="poll in vm.polls">
 		<button type="button" class="list-group-item" ng-click="vm.showVotes(poll)">{{poll.title}}</button>
 		<div ng-if="poll.show === true">

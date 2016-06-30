@@ -18,7 +18,7 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	vm.showVotes = showVotes;
 	vm.isChecked = isChecked;
 	vm.submitVote = submitVote;
-	vm.submitVote = getSpecificPoll;
+	vm.getSpecificPoll = getSpecificPoll;
 
 	activate()
 
@@ -48,7 +48,6 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		}
 		HttpFactory.get(specificPoll).then(function(res) {
 			console.log(res)
-			
 		})
 	}
 
@@ -67,10 +66,10 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 
 		            if (checked)
 		                $(this).prop('checked', 'checked');
-
 		        });
-		console.log("VoteOption ID " + voteOption._id)
+
 		vm.currentOptionId = voteOption._id
+		console.log("VoteOption ID " + vm.currentOptionId)
 	}
 
 	function showVotes(poll) {
@@ -85,8 +84,31 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 
 	function submitVote() {
 	
-		console.log("submit!")
-		//updateSpecificVote()
+		console.log("submit!" + vm.currentOptionId)
+		
+		var specificVote = {
+			params: vm.currentOptionId,
+			url: "/api/votes/" + vm.currentOptionId
+		}
+		HttpFactory.get(specificVote).then(function(res) {
+			
+			vm.numberOfVotes = res.data[0].options[0].votes
+			console.log(vm.numberOfVotes)
+			updateNumberOfVotes()
+		})
+	}
+
+	function updateNumberOfVotes() {
+		console.log("updating from " + vm.numberOfVotes + " to " + (vm.numberOfVotes + 1))
+		var incrementedVote = vm.numberOfVotes + 1
+		console.log(incrementedVote)
+		var updatedVote = {
+			data: incrementedVote,
+			url: "/api/polls/" + vm.currentOptionId
+		}
+		HttpFactory.put(updatedVote).then(function(res) {
+			console.log(response)
+		})
 	}
 }])
 
@@ -102,7 +124,7 @@ myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $rout
 }])
 
 myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function($scope, HttpFactory, $location) {
-	var vm = this
+	var vm = this;
 	
 	vm.anotherOption = anotherOption;
 	vm.addPoll = addPoll;
@@ -118,17 +140,14 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 			"games"
 		]
 		vm.optionsId = 3
-		
 	}
 
 	function anotherOption() {
 		vm.numberOfOptions.push(vm.optionsId);
 		vm.optionsId += 1;
-		
 	}
 
-	function addPoll(newPoll) {
-		
+	function addPoll(newPoll) {	
 		var poll = {
 			data: newPoll,
 			url: "/api/polls"
@@ -139,5 +158,4 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 			$location.url(['/poll-list/' + newPoll.kind])
 		})
 	}
-
 }])
