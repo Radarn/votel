@@ -35,7 +35,8 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 			url: "/api/getAllPolls/" + vm.type 
 		}
 		HttpFactory.get(pollKind).then(function(res) {
-			console.log(res)
+			
+			console.log(res.data)
 			vm.polls = res.data
 		})
 	}

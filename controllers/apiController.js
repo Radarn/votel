@@ -90,18 +90,14 @@ module.exports = function(app) {
    		.get(function(req, res) {
    			var id = req.params.id
    			console.log("This is vote ID " + id)
-   	       	Poll.find({"options._id" : id }, function(err, votes) {
+   	       	Poll.findOneAndUpdate({"options._id" : id }, {$inc: {"options.0.votes": 1}}, function(err, votes) {
    	           	if (err)
    	            	res.send(err);
-   	            var voteScore = votes[0].options[0].votes
-   	            var incrementedScore = (voteScore + 1)
-   	            console.log(incrementedScore)
-   	            Poll.update({"options._id" : id }, {voteScore: incrementedScore}, function(err, score) {
-   	            	console.log(score)
-   	            	res.json(score);
-   	            })
+   	            console.log(votes)
+   	            res.json(votes);
    	           	
    	       	});
+
    	   	});
 
 	app.use('/api', router);

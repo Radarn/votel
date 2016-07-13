@@ -17,7 +17,10 @@
                             			<label>
 	                            			<li class="list-group-item">
 	                            			    <div class="checkbox">
-	                                				<input type="checkbox" value="{{name}}" groupname="group1" ng-click="vm.isChecked(options)"> {{name}}
+	                                				<input type="checkbox" value="{{name}}" groupname="group1" ng-click="vm.isChecked(options)"> 
+	                                				{{name}}
+	                                				<div style="border:2px solid black; padding: 10px; display: inline-block; border-radius: 50%;">{{options.votes}}</div>
+	                                				
 	                                			</div>
 	                                		</li>
                                 		</label>
