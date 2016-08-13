@@ -29,6 +29,8 @@ myApp.config(function ($routeProvider) {
 		controller: "createCtrl",
 		controllerAs: "vm"
 	})
+
+	.otherwise( {redirectTo: '/'});
 });
 
 

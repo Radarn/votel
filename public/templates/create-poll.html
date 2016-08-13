@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4">
-            <label>Add another item to your options list</label>
+            <label>Add options to vote on!</label>
             <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="vm.anotherOption()">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
@@ -23,19 +23,8 @@
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4">
             <select name="kind" id="kind" ng-model="vm.poll.kind">
-                  <option ng-repeat="kind in vm.kinds" value="{{kind}}">{{kind}}</option>
-                </select>
-            <!--<div class="btn-group">
-                <button ng-model="vm.poll.kind" id="create-poll-category" class="btn btn-default btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Category <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li>Food</li>
-                    <li>Movies</li>
-                    <li>Music</li>
-                    <li>Games</li>
-                </ul>
-            </div>-->
+                <option ng-repeat="kind in vm.kinds" value="{{kind}}">{{kind}}</option>
+            </select>
         </div>
     </div>
     <div class="row">

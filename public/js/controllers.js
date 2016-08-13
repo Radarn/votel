@@ -94,7 +94,6 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		HttpFactory.get(specificVote).then(function(res) {
 			
 			vm.numberOfVotes = res.data[0].options[0].votes
-			console.log(vm.numberOfVotes)
 			updateNumberOfVotes()
 		})
 	}
@@ -102,25 +101,27 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	function updateNumberOfVotes() {
 		console.log("updating from " + vm.numberOfVotes + " to " + (vm.numberOfVotes + 1))
 		var incrementedVote = vm.numberOfVotes + 1
-		console.log(incrementedVote)
 		var updatedVote = {
 			params: incrementedVote,
 			url: "/api/votes/update/" + vm.currentOptionId
 		}
 		HttpFactory.get(updatedVote).then(function(res) {
-			console.log(res)
+			console.log(res);
+			getPolls();
+			
 		})
 	}
 }])
 
 myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
 	var vm = this
-
+	console.log("DETAIL CTRL")
 	activate()
 
 	function activate() {
 		vm.type = $routeParams.type
-		console.log(vm.type)
+		vm.id = $routeParams.id
+		console.log(vm.id)
 	}
 }])
 
@@ -133,14 +134,14 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 	activate()
 
 	function activate() {
-		vm.numberOfOptions = [1, 2]
+		vm.numberOfOptions = []
 		vm.kinds = [
 			"food",
 			"music",
 			"movies",
 			"games"
 		]
-		vm.optionsId = 3
+		vm.optionsId = 0
 	}
 
 	function anotherOption() {

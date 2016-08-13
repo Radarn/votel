@@ -23,7 +23,7 @@
                 method: 'GET',
                 headers: options.headers,
                 url: Config.API_BASE_URL + options.url,
-                cache: options.cache !== undefined ? options.cache : true,
+                cache: options.cache !== undefined ? options.cache : false,
                 kind: options.kind,
                 params: options.params
             });

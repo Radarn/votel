@@ -37,8 +37,7 @@ module.exports = function(app) {
 			kind: kind
 		})
 
-		
-		
+			
 		Poll.create(newPoll, function(err, results) {
 			console.log(results)
 			res.send('Success ' + results)
