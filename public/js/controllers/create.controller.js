@@ -3,12 +3,18 @@
 myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function($scope, HttpFactory, $location) {
 	var vm = this;
 	
-	vm.anotherOption = anotherOption;
+	
 	vm.addPoll = addPoll;
+	vm.addChoice = addChoice;
+	vm.addTitle = addTitle;
+	vm.addKind = addKind;
 
 	activate()
 
 	function activate() {
+		vm.buttonState = false;
+		vm.title = '';
+		vm.kind = '';
 		vm.numberOfOptions = []
 		vm.kinds = [
 			"food",
@@ -17,20 +23,45 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 			"games"
 		]
 		vm.optionsId = 0
+		vm.pollData = {
+			question: '',
+			choices: [],
+			kind: ''
+		}
 	}
 
-	function anotherOption() {
-		vm.numberOfOptions.push(vm.optionsId);
-		vm.optionsId += 1;
+	function addTitle() {
+		vm.pollData.question = vm.poll.title;
+		vm.title = vm.poll.title;
+
+		if(vm.title.length > 0) {
+			vm.buttonState = true;
+			$('#add-title').html('Change title');
+			console.log(vm.pollData)
+
+		} else {
+			vm.buttonState = false;
+		}
+	}
+
+	function addChoice() {
+		vm.pollData.choices.push({'choiceTitle': vm.poll.choice, 'voteScore': 0});
+		console.log(vm.pollData);
+		$('#choice').val('');
+	}
+
+	function addKind() {
+		vm.pollData.kind = vm.poll.kind;
+		vm.kind = vm.poll.kind;
 	}
 
 	function addPoll(newPoll) {	
-		var poll = {
-			data: newPoll,
+		vm.pollInfo = {
+			data: vm.pollData,
 			url: "/api/polls/"
 		}
-		console.log(poll)
-		HttpFactory.post(poll).then(function(res) {
+		console.log(vm.pollInfo)
+		HttpFactory.post(vm.pollInfo).then(function(res) {
 			console.log(res)
 			$location.url(['/poll-list/' + newPoll.kind])
 		})

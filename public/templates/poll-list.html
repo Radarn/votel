@@ -12,19 +12,16 @@
 		            <div class="panel-body">
 		                <ul class="list-group">
     	                    <div ng-repeat="options in poll.options">
-                            	<div ng-repeat="names in options.names">
-                            		<div ng-repeat="name in names">
-                            			<label>
-	                            			<li class="list-group-item">
-	                            			    <div class="checkbox">
-	                                				<input type="checkbox" value="{{name}}" groupname="group1" ng-click="vm.isChecked(options)"> 
-	                                				{{name}}
-	                                				<div style="border:2px solid black; padding: 10px; display: inline-block; border-radius: 50%;">{{options.votes}}</div>
-	                                				
-	                                			</div>
-	                                		</li>
-                                		</label>
-	                                </div>
+                            	<div ng-repeat="name in options.name track by $index">
+                        			<label>
+                            			<li class="list-group-item">
+                            			    <div class="checkbox">
+                                				<input type="checkbox" value="{{name}}" groupname="group1" ng-click="vm.isChecked(options)"> 
+                                				{{name}}
+                                				<div style="border:2px solid black; padding: 10px; display: inline-block; border-radius: 50%;">{{options.votes}}</div>
+                                			</div>
+                                		</li>
+                            		</label>
 	                            </div>
 		                    </div>
 		                </ul>

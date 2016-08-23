@@ -1,30 +1,63 @@
 <form class="create-poll-form">
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4">
-            <label for="title">Title</label>
-            <input ng-model="vm.poll.title" type="text" class="form-control" id="title" placeholder="Give your poll a title">
+            <button id="add-title" type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" ng-class="{'btn btn-warning': vm.buttonState}">Add a title</button>
+            {{vm.title}}
+        </div>
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input ng-model="vm.poll.title" type="text" class="form-control" id="title" placeholder="Give your poll a title">
+                    </div>
+                    <button type="button" class="btn btn-success col-sm-4 col-sm-offset-4" style="margin-top:10px;" ng-click="vm.addTitle()" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div ng-repeat="options in vm.numberOfOptions">
+    <div class="row">
+        <div class="form-group col-sm-4 col-sm-offset-4 text-center">
+            <label>Add options!</label>
+        </div>
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target=".add-choice">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="modal fade add-choice" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input ng-model="vm.poll.choice" type="text" class="form-control" id="choice" placeholder="Add a option">
+                    </div>
+                    <button type="button" class="btn btn-success col-sm-4 col-sm-offset-4" style="margin-top:10px;" ng-click="vm.addChoice()" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-repeat="choice in vm.pollData.choices">
         <div class="row">
             <div class="form-group col-sm-4 col-sm-offset-4">
-                <input ng-model="vm.poll.options[options]" type="text" class="form-control" id="item" placeholder="Option name">
+                <span class="label label-default">{{choice.choiceTitle}}</span>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4">
-            <label>Add options to vote on!</label>
-            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="vm.anotherOption()">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            </button>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".add-kind">Add Category</button>
+            {{vm.kind}}
         </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-sm-4 col-sm-offset-4">
-            <select name="kind" id="kind" ng-model="vm.poll.kind">
-                <option ng-repeat="kind in vm.kinds" value="{{kind}}">{{kind}}</option>
-            </select>
+        <div class="modal fade add-kind" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <select name="kind" id="kind" ng-model="vm.poll.kind">
+                            <option ng-repeat="kind in vm.kinds" value="{{kind}}">{{kind}}</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-success col-sm-4 col-sm-offset-4" style="margin-top:10px;" ng-click="vm.addKind()" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
