@@ -57,7 +57,8 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		        });
 
 		vm.currentOptionId = voteOption._id
-		console.log("VoteOption ID " + vm.currentOptionId)
+		vm.currentChoiceTitle = voteOption.choiceTitle;
+		
 	}
 
 	function showVotes(poll) {
@@ -72,21 +73,22 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 
 	function submitVote() {
 	
-		console.log("submit!" + vm.currentOptionId)
+		//console.log("submit!" + vm.poll.)
 		
 		var specificVote = {
-			params: vm.currentOptionId,
-			url: "/api/votes/" + vm.currentOptionId
+			params: vm.currentChoiceTitle,
+			url: "/api/votes/" + vm.currentChoiceTitle
 		}
 		HttpFactory.get(specificVote).then(function(res) {
-			
-			vm.numberOfVotes = res.data[0].options[0].votes
+			console.log(res)
+			vm.choices = res.data[0].options;
 			updateNumberOfVotes()
 		})
 	}
 
 	function updateNumberOfVotes() {
-		console.log("updating from " + vm.numberOfVotes + " to " + (vm.numberOfVotes + 1))
+
+		/*console.log("updating from " + vm.numberOfVotes + " to " + (vm.numberOfVotes + 1))
 		var incrementedVote = vm.numberOfVotes + 1
 		var updatedVote = {
 			params: incrementedVote,
@@ -96,6 +98,6 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 			console.log(res);
 			getPolls();
 			
-		})
+		})*/
 	}
 }])

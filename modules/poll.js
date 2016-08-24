@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var voteSchema = new mongoose.Schema({ ip: 'String' });
 
 var choiceSchema = new mongoose.Schema({ 
-  names: Array,
+  name: String,
   votes: {
   	type: Number,
   	default: 0
@@ -14,7 +14,7 @@ var choiceSchema = new mongoose.Schema({
 
 var pollSchema = new Schema({
 	title: String,
-	options: [choiceSchema],
+	options: Array,
 	kind: String,
 	show: {
 		type: Boolean,
@@ -30,16 +30,6 @@ var pollSchema = new Schema({
 
 
 var Poll = mongoose.model('Poll', pollSchema);
-
-module.exports = Poll
-
-/*var mongoose = require('mongoose');
-var voteSchema = new mongoose.Schema({ ip: 'String' });
-var choiceSchema = new mongoose.Schema({ 
-  text: String,
-  votes: [voteSchema]
-});
-module.exports.PollSchema = new mongoose.Schema({
-  question: { type: String, required: true },
-  choices: [choiceSchema]
-});*/
+var Choice = mongoose.model('Choice', choiceSchema);
+module.exports = Choice;
+module.exports = Poll;

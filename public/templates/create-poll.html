@@ -2,7 +2,9 @@
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4">
             <button id="add-title" type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" ng-class="{'btn btn-warning': vm.buttonState}">Add a title</button>
-            {{vm.title}}
+        </div>
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <span class="label label-default">{{vm.title}}</span>
         </div>
         <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
             <div class="modal-dialog modal-sm" role="document">
@@ -45,7 +47,9 @@
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target=".add-kind">Add Category</button>
-            {{vm.kind}}
+        </div>
+        <div class="form-group col-sm-4 col-sm-offset-4">
+            <span class="label label-default">{{vm.kind}}</span>
         </div>
         <div class="modal fade add-kind" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
             <div class="modal-dialog modal-sm" role="document">
