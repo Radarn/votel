@@ -26,13 +26,6 @@ module.exports = function(app) {
 		var title = req.body.question;
 		var kind = req.body.kind;
 		var choices = req.body.choices;
-		
-		/*var options = req.body.options
-		var option = options[0];
-		var option2 = options[1];
-		var arr = []
-		arr.push(options)
-		var kind = req.body.kind*/
 
 		var newPoll = Poll({
 			title: title,
@@ -46,7 +39,7 @@ module.exports = function(app) {
 			res.send('Success ' + results)
 		})
 
-	})
+	});
 
    	router.route('/polls/:id')
 
@@ -74,34 +67,29 @@ module.exports = function(app) {
        	});
    	});
 
-	router.route('/votes/:id')
-
-	.get(function(req, res) {
-		var id = req.params.id
-		console.log("This is vote ID " + id)
-		// HERE I WILL NEED TO AGGREGATE !
-       	Poll.find({"options.choiceTitle" : id }, function(err, votes) {
-           	if (err)
-            	res.send(err);
-            console.log("This is votes" + votes)
-           	res.json(votes);
-       	});
-   	});
-
    	router.route('/votes/update/:id')
 
-   		.get(function(req, res) {
-   			var id = req.params.id
-   			console.log("This is vote ID " + id)
-   	       	Choice.findOneAndUpdate({"options.choiceTitle" : id }, {$inc: {"votesScore": 1}}, function(err, votes) {
-   	           	if (err)
-   	            	res.send(err);
-   	            console.log(votes)
-   	            res.json(votes);
-   	           	
-   	       	});
+	.get(function(req, res) {
+		var params = req.params.id
+		var choiceId = params.substring(0, 1)
+		var pollId = params.substring(2)
+		console.log(pollId)
+		console.log("This is currentChoiceId " + choiceId)
 
-   	   	});
+		var number = 0;
+		choiceId = parseInt(choiceId)
+		var string = "options." + choiceId +  ".voteScore";
+		var action = {};
+		action[string] = 1;
+
+		Poll.findOneAndUpdate({"_id": pollId}, {$inc: action}, function(err, votes) {
+			if (err)
+			 	res.send(err);
+			 console.log(votes);
+			 res.json(votes);
+		})
+
+   	});
 
 	app.use('/api', router);
 }

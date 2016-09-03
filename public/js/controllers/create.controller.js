@@ -12,6 +12,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 	activate()
 
 	function activate() {
+		vm.choiceId = 0;
 		vm.buttonState = false;
 		vm.title = '';
 		vm.kind = '';
@@ -28,7 +29,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 			choices: [],
 			kind: ''
 		}
-	}
+	};
 
 	function addTitle() {
 		vm.pollData.question = vm.poll.title;
@@ -42,18 +43,19 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 		} else {
 			vm.buttonState = false;
 		}
-	}
+	};
 
 	function addChoice() {
-		vm.pollData.choices.push({'choiceTitle': vm.poll.choice, 'voteScore': 0});
+		vm.pollData.choices.push({'choiceTitle': vm.poll.choice, 'voteScore': 0, 'choiceId': vm.choiceId});
+		vm.choiceId += 1;
 		console.log(vm.pollData);
 		$('#choice').val('');
-	}
+	};
 
 	function addKind() {
 		vm.pollData.kind = vm.poll.kind;
 		vm.kind = vm.poll.kind;
-	}
+	};
 
 	function addPoll(newPoll) {	
 		vm.pollInfo = {
@@ -65,5 +67,5 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 			console.log(res)
 			$location.url(['/poll-list/' + newPoll.kind])
 		})
-	}
-}])
+	};
+}]);

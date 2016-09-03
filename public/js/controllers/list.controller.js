@@ -13,8 +13,7 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		vm.type = $routeParams.type;
 		vm.votes = false;
 		vm.getPolls();
-		console.log(vm.type)
-	}
+	};
 
 	function getPolls() {
 		var pollKind = {
@@ -22,22 +21,21 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 			url: "/api/getAllPolls/" + vm.type 
 		}
 		HttpFactory.get(pollKind).then(function(res) {
-			
-			console.log(res.data)
 			vm.polls = res.data
-		})
-	}
+		});
+	};
 
 	function getSpecificPoll(id) {
 		console.log("POLL ID " + id)
+		vm.pollId = id;
 		var specificPoll = {
 			params: id,
 			url: "/api/polls/" + id
 		}
 		HttpFactory.get(specificPoll).then(function(res) {
 			console.log(res)
-		})
-	}
+		});
+	};
 
 	function isChecked(voteOption) {
 		$('input[type=checkbox]').click(function() {
@@ -55,11 +53,8 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		            if (checked)
 		                $(this).prop('checked', 'checked');
 		        });
-
-		vm.currentOptionId = voteOption._id
-		vm.currentChoiceTitle = voteOption.choiceTitle;
-		
-	}
+		vm.currentChoiceId = voteOption.choiceId;
+	};
 
 	function showVotes(poll) {
 		if (poll.show === false) {
@@ -69,35 +64,15 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		}
 
 		getSpecificPoll(poll._id)
-	}
+	};
 
 	function submitVote() {
-	
-		//console.log("submit!" + vm.poll.)
-		
-		var specificVote = {
-			params: vm.currentChoiceTitle,
-			url: "/api/votes/" + vm.currentChoiceTitle
-		}
-		HttpFactory.get(specificVote).then(function(res) {
-			console.log(res)
-			vm.choices = res.data[0].options;
-			updateNumberOfVotes()
-		})
-	}
-
-	function updateNumberOfVotes() {
-
-		/*console.log("updating from " + vm.numberOfVotes + " to " + (vm.numberOfVotes + 1))
-		var incrementedVote = vm.numberOfVotes + 1
 		var updatedVote = {
-			params: incrementedVote,
-			url: "/api/votes/update/" + vm.currentOptionId
+			url: "/api/votes/update/" + vm.currentChoiceId +":"+ vm.pollId
 		}
 		HttpFactory.get(updatedVote).then(function(res) {
-			console.log(res);
+			console.log("UPDATED" + res);
 			getPolls();
-			
-		})*/
-	}
-}])
+		});
+	};
+}]);

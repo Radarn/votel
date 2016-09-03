@@ -7,6 +7,6 @@ myApp.controller('dashboardCtrl', ['$scope', function($scope) {
 
 	function activate() {
 	
-	}
+	};
 
 }]);

@@ -9,5 +9,5 @@ myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $rout
 		vm.type = $routeParams.type
 		vm.id = $routeParams.id
 		console.log(vm.id)
-	}
+	};
 }])
