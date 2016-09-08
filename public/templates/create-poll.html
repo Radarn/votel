@@ -1,69 +1,35 @@
 <!-- NEED TO CREATE DIRECTIVES FOR THIS -->
-
 <form class="create-poll-form">
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4">
-            <button id="add-title" type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" ng-class="{'btn btn-warning': vm.buttonState}">Add a title</button>
+            <button id="add-title" type="button" class="btn btn-default create-poll-edit-button" ng-class="{'is-hidden': vm.buttonState}" ng-click="vm.toggleTitleButtonState()">{{vm.title}}</button>
         </div>
         <div class="form-group col-sm-4 col-sm-offset-4">
-            <span class="label label-default">{{vm.title}}</span>
-        </div>
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <input ng-model="vm.poll.title" type="text" class="form-control" id="title" placeholder="Give your poll a title">
-                    </div>
-                    <button type="button" class="btn btn-success col-sm-4 col-sm-offset-4" style="margin-top:10px;" ng-click="vm.addTitle()" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
+            <input type="text" class="form-control" placeholder="{{vm.title}}" ng-class="{'is-hidden': !vm.buttonState}" ng-blur="vm.toggleTitleButtonState()" ng-model="vm.poll.title">
         </div>
     </div>
     <div class="row">
         <div class="form-group col-sm-4 col-sm-offset-4 text-center">
             <label>Add options!</label>
-        </div>
-        <div class="form-group col-sm-4 col-sm-offset-4">
-            <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target=".add-choice">
+            <button type="button" class="btn btn-default add-options-button" aria-label="Left Align" ng-click="vm.anotherOption()">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
         </div>
-        <div class="modal fade add-choice" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <input ng-model="vm.poll.choice" type="text" class="form-control" id="choice" placeholder="Add a option">
-                    </div>
-                    <button type="button" class="btn btn-success col-sm-4 col-sm-offset-4" style="margin-top:10px;" ng-click="vm.addChoice()" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
     </div>
-    <div ng-repeat="choice in vm.pollData.choices">
-        <div class="row">
+    <div ng-repeat="choice in vm.pollData.choices track by $index">
+        <div class="row" id="choices-row">
             <div class="form-group col-sm-4 col-sm-offset-4">
-                <span class="label label-default">{{choice.choiceTitle}}</span>
+               <input type="text" class="form-control" ng-blur="vm.submitOption($index, vm.poll.choice[$index])" ng-class="{'is-hidden': vm.pollData.choices[$index].show}" ng-model="vm.poll.choice[$index]">
+               <button type="button" class="btn btn-default create-poll-edit-button" ng-class="{'is-hidden': !vm.pollData.choices[$index].show}"><span class="choice-number">{{$index}}.</span>{{vm.pollData.choices[$index].choiceTitle}}</button>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-sm-4 col-sm-offset-4">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".add-kind">Add Category</button>
-        </div>
-        <div class="form-group col-sm-4 col-sm-offset-4">
-            <span class="label label-default">{{vm.kind}}</span>
-        </div>
-        <div class="modal fade add-kind" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <select name="kind" id="kind" ng-model="vm.poll.kind">
-                            <option ng-repeat="kind in vm.kinds" value="{{kind}}">{{kind}}</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-success col-sm-4 col-sm-offset-4" style="margin-top:10px;" ng-click="vm.addKind()" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
+        <div class="form-group col-sm-4 col-sm-offset-4 dropdown">
+            <button type="button" class="btn btn-default create-poll-edit-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{vm.kind}}<span class="caret"></span></button>
+            <ul class="dropdown-menu kind-list" aria-labelledby="dLabel">
+                <li ng-repeat="kind in vm.kinds"><a type="button" class="btn btn-default" ng-click="vm.addKind(kind)">{{kind}}</a></li>
+            </ul>
         </div>
     </div>
     <div class="row">

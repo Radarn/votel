@@ -8,20 +8,24 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 	vm.addChoice = addChoice;
 	vm.addTitle = addTitle;
 	vm.addKind = addKind;
+	vm.toggleTitleButtonState = toggleTitleButtonState;
+	vm.anotherOption = anotherOption;
+	vm.submitOption = submitOption;
 
 	activate()
 
 	function activate() {
+		$('.dropdown-toggle').dropdown()
 		vm.choiceId = 0;
 		vm.buttonState = false;
-		vm.title = '';
-		vm.kind = '';
+		vm.title = 'Add Title';
+		vm.kind = 'Add Category';
 		vm.numberOfOptions = []
 		vm.kinds = [
-			"food",
-			"music",
-			"movies",
-			"games"
+			"Food",
+			"Music",
+			"Movies",
+			"Games"
 		]
 		vm.optionsId = 0
 		vm.pollData = {
@@ -31,19 +35,29 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 		}
 	};
 
+	function toggleTitleButtonState() {
+		if (vm.buttonState === false) {
+			vm.buttonState = true;
+		} else {
+			vm.buttonState = false;
+			addTitle();
+		}
+	};
+
 	function addTitle() {
 		vm.pollData.question = vm.poll.title;
 		vm.title = vm.poll.title;
-
-		if(vm.title.length > 0) {
-			vm.buttonState = true;
-			$('#add-title').html('Change title');
-			console.log(vm.pollData)
-
-		} else {
-			vm.buttonState = false;
-		}
 	};
+
+	function anotherOption() {
+		vm.pollData.choices.push({'show': false, 'voteScore': 0, 'choiceId': vm.choiceId})
+		vm.choiceId += 1;
+	};
+
+	function submitOption(index, model) {
+		vm.pollData.choices[index].choiceTitle = model;
+		vm.pollData.choices[index].show = true;
+	};	
 
 	function addChoice() {
 		vm.pollData.choices.push({'choiceTitle': vm.poll.choice, 'voteScore': 0, 'choiceId': vm.choiceId});
@@ -52,9 +66,10 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 		$('#choice').val('');
 	};
 
-	function addKind() {
-		vm.pollData.kind = vm.poll.kind;
-		vm.kind = vm.poll.kind;
+	function addKind(kind) {
+		console.log(kind)
+		vm.pollData.kind = kind.toLowerCase();
+		vm.kind = kind;
 	};
 
 	function addPoll(newPoll) {	
@@ -65,7 +80,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 		console.log(vm.pollInfo)
 		HttpFactory.post(vm.pollInfo).then(function(res) {
 			console.log(res)
-			$location.url(['/poll-list/' + newPoll.kind])
+			$location.url(['/poll-list/' + vm.kind.toLowerCase()])
 		})
 	};
 }]);

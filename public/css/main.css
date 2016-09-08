@@ -18,12 +18,40 @@
 	text-align: center;
 }
 
-.form-group > button {
+.create-poll-edit-button {
 	width: 100%;
 	margin: 10px;
 }
 
+.form-group > input {
+	height: 33px;
+	position:relative;
+	left: 9px;
+}
+
 .form-group > .label {
 	font-size: 1em;
+}
+
+.is-hidden {
+	transition: 0.2s all ease-out;
+	display: none;
+}
+
+#add-options.button {
+	width: 20% !important;
+}
+
+.choice-number {
+	margin-right: 10px;
+}
+
+.kind-list {
+	width: 80%;
+	left: 12%;
+}
+.dropdown-menu>li>a {
+	padding: 10px;
+	margin-bottom: 5px;
 }
 
