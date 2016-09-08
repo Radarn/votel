@@ -1,32 +1,6 @@
 <div class="list-group">
 	<h1>{{vm.type}}</h1>
 	<div ng-repeat="poll in vm.polls">
-		<button type="button" class="list-group-item" ng-click="vm.showVotes(poll)">{{poll.title}}</button>
-		<div ng-if="poll.show === true">
-			<div class="col-md-4"></div>
-		    <div class="col-md-4">
-		        <div class="panel panel-primary">
-		            <div class="panel-heading">
-		                <h3 class="panel-title"><span class="fa fa-line-chart"></span> Vote! </h3>
-		            </div>
-		            <div class="panel-body">
-		                <ul class="list-group">
-    	                    <div ng-repeat="options in poll.options">
-                    			<label>
-                        			<li class="list-group-item">
-                        			    <div class="checkbox">
-                            				<input type="checkbox" value="{{name}}" groupname="group1" ng-click="vm.isChecked(options)"> 
-                            				{{options.choiceTitle}}
-                            				<div style="border:2px solid black; padding: 10px; display: inline-block; border-radius: 50%;">{{options.voteScore}}</div>
-                            			</div>
-                            		</li>
-                        		</label>     
-		                    </div>
-		                </ul>
-		            </div>
-		            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.submitVote()">Ok!</button>
-		        </div>
-		    </div>
-		</div>
+		<a type="button" class="list-group-item" ng-href="#/poll-detail/{{poll._id}}">{{poll.title}}</a>
 	</div>
 </div>

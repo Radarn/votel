@@ -1,6 +1,5 @@
 var express = require('express');
 var Poll = require('../modules/Poll');
-var Choice = require('../modules/Poll')
 var bodyParser = require('body-parser');
 var cors = require('cors');
 

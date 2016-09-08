@@ -1,13 +1,25 @@
 'use strict';
 
-myApp.controller('detailCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
+myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFactory, $routeParams) {
 	var vm = this
-	console.log("DETAIL CTRL")
+
+	vm.getPoll = getPoll;
+
 	activate()
 
 	function activate() {
 		vm.type = $routeParams.type
 		vm.id = $routeParams.id
-		console.log(vm.id)
+		getPoll()
 	};
-}])
+
+	function getPoll() {
+		var specificPoll = {
+			url: "/api/polls/" + vm.id
+		}
+		HttpFactory.get(specificPoll).then(function(res) {
+			vm.polls = res.data;
+		});
+	};
+	
+}]);

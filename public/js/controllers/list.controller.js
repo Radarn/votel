@@ -13,6 +13,7 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		vm.type = $routeParams.type;
 		vm.votes = false;
 		vm.getPolls();
+
 	};
 
 	function getPolls() {
@@ -22,18 +23,6 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		}
 		HttpFactory.get(pollKind).then(function(res) {
 			vm.polls = res.data
-		});
-	};
-
-	function getSpecificPoll(id) {
-		console.log("POLL ID " + id)
-		vm.pollId = id;
-		var specificPoll = {
-			params: id,
-			url: "/api/polls/" + id
-		}
-		HttpFactory.get(specificPoll).then(function(res) {
-			console.log(res)
 		});
 	};
 
@@ -54,16 +43,6 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 		                $(this).prop('checked', 'checked');
 		        });
 		vm.currentChoiceId = voteOption.choiceId;
-	};
-
-	function showVotes(poll) {
-		if (poll.show === false) {
-			poll.show = true;
-		} else {
-			poll.show = false;
-		}
-
-		getSpecificPoll(poll._id)
 	};
 
 	function submitVote() {
