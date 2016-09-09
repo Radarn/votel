@@ -2,7 +2,6 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	var vm = this
 
 	vm.getPolls = getPolls;
-	vm.isChecked = isChecked;
 
 	activate()
 
