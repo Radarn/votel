@@ -22,7 +22,7 @@
         <div class="row" id="choices-row">
             <div class="form-group col-sm-4 col-sm-offset-4">
                <input type="text" class="form-control" ng-blur="vm.submitOption($index, vm.poll.choice[$index])" ng-class="{'is-hidden': vm.pollData.choices[$index].show}" ng-model="vm.poll.choice[$index]">
-               <button type="button" class="btn btn-default create-poll-edit-button" ng-class="{'is-hidden': !vm.pollData.choices[$index].show}"><span class="choice-number">{{$index}}.</span>{{vm.pollData.choices[$index].choiceTitle}}</button>
+               <button type="button" class="btn btn-default create-poll-edit-button" ng-class="{'is-hidden': !vm.pollData.choices[$index].show}" ng-click="vm.pollData.choices[$index].show = !vm.pollData.choices[$index].show"><span class="choice-number">{{$index}}.</span>{{vm.pollData.choices[$index].choiceTitle}}</button>
             </div>
         </div>
     </div>
