@@ -1,5 +1,5 @@
 <div class="list-group">
-	<h1>{{vm.type}}</h1>
+	<h1><span class = "label label-primary">{{vm.type}}</span></h1>
 	<div ng-repeat="poll in vm.polls">
 		<a type="button" class="list-group-item" ng-href="#/poll-detail/{{poll._id}}">{{poll.title}}</a>
 	</div>
