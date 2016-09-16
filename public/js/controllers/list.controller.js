@@ -6,7 +6,8 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	activate()
 
 	function activate() {
-		vm.type = $routeParams.type.toUpperCase();
+		vm.type = $routeParams.type;
+		vm.typeTitle = $routeParams.type.toUpperCase()
 		vm.votes = false;
 		vm.getPolls();
 
