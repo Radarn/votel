@@ -62,12 +62,10 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 	function addChoice() {
 		vm.pollData.choices.push({'choiceTitle': vm.poll.choice, 'voteScore': 0, 'choiceId': vm.choiceId});
 		vm.choiceId += 1;
-		console.log(vm.pollData);
 		$('#choice').val('');
 	};
 
 	function addKind(kind) {
-		console.log(kind)
 		vm.pollData.kind = kind.toLowerCase();
 		vm.kind = kind;
 	};
@@ -77,9 +75,7 @@ myApp.controller('createCtrl', ['$scope', 'HttpFactory', '$location', function(
 			data: vm.pollData,
 			url: "/api/polls/"
 		}
-		console.log(vm.pollInfo)
 		HttpFactory.post(vm.pollInfo).then(function(res) {
-			console.log(res)
 			$location.url(['/poll-list/' + vm.kind.toLowerCase()])
 		})
 	};
