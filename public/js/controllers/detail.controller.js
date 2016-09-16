@@ -47,7 +47,7 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 	function submitVote() {
 		var updatedVote = {
 			url: "/api/votes/update/" + vm.currentChoiceId +":"+ vm.pollId
-		}
+		};
 		HttpFactory.get(updatedVote).then(function(res) {
 			console.log(res);
 			getPoll();
