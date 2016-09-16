@@ -21,3 +21,4 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 			vm.polls = res.data
 		});
 	};
+}]);
