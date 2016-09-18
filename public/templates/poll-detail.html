@@ -23,7 +23,8 @@
 	            	</ul>
 	            </div>
 	            <div class="submit-vote-btn-container">
-		            <button type="submit" class="btn btn-success btn-lg submit-vote-btn" ng-click="vm.submitVote()">Vote!</button>
+		            <button type="submit" ng-class="{'is-hidden': !vm.showVoteButton}" class="btn btn-success btn-lg submit-vote-btn" ng-click="vm.submitVote()">Vote!</button>
+		            <h4 ng-class="{'is-hidden': vm.showVoteButton}">Thank you for your vote!</h4>
 	            </div>
 	        </div>
 	    </div>

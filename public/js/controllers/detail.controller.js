@@ -15,6 +15,7 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 		vm.type = $routeParams.type;
 		vm.pollId = $routeParams.id;
 		vm.showProgressBar = false;
+		vm.showVoteButton = true;
 		vm.totalVoteScore = 0;
 		vm.progressBarWidthArr = [];
 		getPoll()
@@ -26,7 +27,6 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 		}
 		HttpFactory.get(specificPoll).then(function(res) {
 			vm.polls = res.data;
-			console.log(vm.polls)
 		});
 	};
 
@@ -35,6 +35,7 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 			url: "/api/votes/update/" + vm.currentChoiceId +":"+ vm.pollId
 		};
 		HttpFactory.get(updatedVote).then(function(res) {
+			vm.showVoteButton = false;
 			showResult();
 		});
 	};
@@ -61,13 +62,10 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 
 	function countProgressBarWidth() {
 		for (var i = 0; i < vm.pollOptions.length; i++) {
-			console.log("VoteScore " + vm.pollOptions[i].voteScore)
 			var count = vm.pollOptions[i].voteScore / vm.totalVoteScore;
 			count *= 100
-			console.log("count " + count)
 			vm.progressBarWidthArr.push(count)
 		}
-		console.log(vm.progressBarWidthArr);
 		vm.showProgressBar = true;
 	};
 	
