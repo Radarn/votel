@@ -26,6 +26,7 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 		}
 		HttpFactory.get(specificPoll).then(function(res) {
 			vm.polls = res.data;
+			console.log(vm.polls)
 		});
 	};
 

@@ -4,13 +4,13 @@
 	    <div class="col-md-4">
 	        <div class="panel panel-primary">
 	            <div class="panel-heading">
-	                <h3 class="panel-title"><span class="fa fa-line-chart"></span> Vote! </h3>
+	                <h3 class="panel-title"><span class="fa fa-line-chart"></span> {{vm.polls[0].title}} </h3>
 	            </div>
 	            <div class="panel-body">
 	            	<ul class="nav nav-pills nav-stacked">
 						<div ng-repeat="options in poll.options track by $index">
 							<div ng-hide="vm.showProgressBar">
-				            	<li><button class="btn btn-default" ng-click="vm.currentChoice(options)" style="width:100%;">{{options.choiceTitle}}</button><span class="badge">{{options.voteScore}}</span></li>
+				            	<li><button class="btn btn-default detail-option" ng-click="vm.currentChoice(options)">{{options.choiceTitle}}</button></li>
 				            </div>
 			            	<div ng-show="vm.showProgressBar">
 				            	<div class="progress">
@@ -22,7 +22,9 @@
 		            	</div>
 	            	</ul>
 	            </div>
-	            <button type="submit" class="btn btn-success btn-lg" ng-click="vm.submitVote()">Ok!</button>
+	            <div class="submit-vote-btn-container">
+		            <button type="submit" class="btn btn-success btn-lg submit-vote-btn" ng-click="vm.submitVote()">Vote!</button>
+	            </div>
 	        </div>
 	    </div>
 		
