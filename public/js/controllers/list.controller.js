@@ -1,4 +1,4 @@
-myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function($scope, $routeParams, HttpFactory) {
+myApp.controller('listCtrl', ['$routeParams', 'HttpFactory', function($routeParams, HttpFactory) {
 	var vm = this
 
 	vm.getPolls = getPolls;
@@ -6,8 +6,8 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	activate()
 
 	function activate() {
-		vm.type = $routeParams.type;
-		vm.typeTitle = $routeParams.type.toUpperCase()
+		vm.category = $routeParams.type;
+		vm.categoryTitle = $routeParams.type.toUpperCase()
 		vm.votes = false;
 		vm.getPolls();
 
@@ -16,7 +16,7 @@ myApp.controller('listCtrl', ['$scope', '$routeParams', 'HttpFactory', function(
 	function getPolls() {
 		var pollKind = {
 			kind: vm.type,
-			url: "/api/getAllPolls/" + vm.type 
+			url: "/api/getAllPolls/" + vm.category 
 		}
 		HttpFactory.get(pollKind).then(function(res) {
 			vm.polls = res.data
