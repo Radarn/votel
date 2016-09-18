@@ -4,7 +4,6 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 	var vm = this
 
 	vm.getPoll = getPoll;
-	vm.isChecked = isChecked;
 	vm.submitVote = submitVote;
 	vm.showResult = showResult;
 	vm.currentChoice = currentChoice;
