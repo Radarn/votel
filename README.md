@@ -4,5 +4,5 @@ To run the app:
 
 1. NPM install in root folder.
 2. Run: nodemon / node app.js in root folder
-3. cd into public folder.
+3. Open another ternimal widnow and cd into public folder.
 4. Run: http-server -p port in public folder
