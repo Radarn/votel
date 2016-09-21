@@ -14,8 +14,8 @@
 				            </div>
 			            	<div ng-show="vm.showProgressBar">
 				            	<div class="progress">
-				            	  <div class="progress-bar" role="progressbar" aria-valuenow="{{options.voteScore}}" aria-valuemin="0" aria-valuemax="{{vm.totalVoteScore}}" style="min-width: 2em; width: {{vm.progressBarWidthArr[$index]}}%;">
-				            	    {{options.voteScore}}
+					            	<div class="progress-bar" role="progressbar" aria-valuenow="{{options.voteScore}}" aria-valuemin="0" aria-valuemax="{{vm.totalVoteScore}}" style="min-width: 2em; width: {{vm.progressBarWidthArr[$index]}}%;">
+				            	    {{options.choiceTitle}}{{options.voteScore}}
 				            	  </div>
 				            	</div>
 			            	</div>

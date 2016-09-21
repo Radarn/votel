@@ -50,8 +50,6 @@ myApp.controller('detailCtrl', ['HttpFactory', '$routeParams', function(HttpFact
 			for (var i = 0; i < vm.pollOptions.length; i++) {
 				vm.totalVoteScore += vm.pollOptions[i].voteScore
 			}
-	
-			console.log(vm.totalVoteScore);
 			vm.countProgressBarWidth();
 		});
 	};
