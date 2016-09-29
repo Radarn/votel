@@ -7,25 +7,25 @@ myApp.config(function ($routeProvider) {
 	$routeProvider
 
 	.when("/", {
-		templateUrl: "../templates/landing.html",
+		templateUrl: "landing.html",
 		controller: "dashboardCtrl",
 		controllerAs: "vm"
 	})
 
 	.when("/poll-list/:type", {
-		templateUrl: "../templates/poll-list.html",
+		templateUrl: "poll-list.html",
 		controller: "listCtrl",
 		controllerAs: "vm"
 	})
 
 	.when("/poll-detail/:id", {
-		templateUrl: "../templates/poll-detail.html",
+		templateUrl: "poll-detail.html",
 		controller: "detailCtrl",
 		controllerAs: "vm"
 	})
 
 	.when("/create-poll", {
-		templateUrl: "../templates/create-poll.html",
+		templateUrl: "create-poll.html",
 		controller: "createCtrl",
 		controllerAs: "vm"
 	})
